@@ -1,9 +1,16 @@
 <script setup lang="ts">
+import { useEventStore } from '@/stores/useEventStore'
 import type { Event } from '@/types'
+
+const eventStore = useEventStore()
 
 defineProps<{
   event: Event
 }>()
+
+const setCurrentEvent = (event: Event) => {
+  eventStore.setCurrentEvent(event)
+}
 </script>
 
 <template>
@@ -16,7 +23,11 @@ defineProps<{
     >
       <div class="spacer">Invited: {{ event.invitees.length }}</div>
       <v-card-actions>
-        <v-btn> Details </v-btn>
+        <v-btn>
+          <router-link @click="setCurrentEvent(event)" class="link" :to="'/event/' + event.id"
+            >Details anzeigen</router-link
+          >
+        </v-btn>
       </v-card-actions>
     </v-card>
   </div>
@@ -45,5 +56,10 @@ defineProps<{
 
 .padding {
   padding: 1rem;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
 }
 </style>
