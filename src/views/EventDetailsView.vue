@@ -23,7 +23,7 @@ const handleSendInvites = () => {
 
 const addContact = (contact: Contact) => {
   console.log(event)
-  if (!event?.invitees.find((invitee) => invitee.id == contact.id)) {
+  if (!event?.invitees.find((invitee) => invitee.email == contact.email)) {
     event?.invitees.push(contact)
   }
 }
