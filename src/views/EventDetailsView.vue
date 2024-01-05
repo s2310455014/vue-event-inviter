@@ -2,7 +2,6 @@
 import { useContactsStore } from '@/stores/useContactStore'
 import { useEventStore } from '@/stores/useEventStore'
 import ContactCard from '@/components/ContactCard.vue'
-import { ref } from 'vue'
 import type { Contact } from '@/types'
 
 const eventsStore = useEventStore()
@@ -12,6 +11,9 @@ const contactsStore = useContactsStore()
 const contacts = contactsStore.contacts
 
 const handleSendInvites = () => {
+  if (event) {
+    event.isInvitesSent = true
+  }
   event?.invitees.forEach((invitee) => {
     const invitationText = `Dear ${invitee.firstName} ${invitee.lastName}! You are invited to the event "${event.name}" on ${event.date} at ${event.time}. "${event.description}"`
     const link = `https://api.whatsapp.com/send?phone=${invitee.telNumber}&text=${invitationText}`
@@ -20,9 +22,19 @@ const handleSendInvites = () => {
 }
 
 const addContact = (contact: Contact) => {
-  console.log('addContact')
+  console.log(event)
+  if (!event?.invitees.find((invitee) => invitee.id == contact.id)) {
+    event?.invitees.push(contact)
+  }
+}
 
-  event?.invitees.push(contact)
+const removeContact = (contact: Contact) => {
+  event?.invitees.splice(event?.invitees.indexOf(contact), 1)
+}
+
+const setCurrentContact = (contact: Contact) => {
+  console.log(contact)
+  contactsStore.setCurrentContact(contact)
 }
 </script>
 
@@ -44,11 +56,18 @@ const addContact = (contact: Contact) => {
       <div class="contact-description">YOUR INVITEES</div>
 
       <div class="contact-cards">
-        <ContactCard
+        <div
+          class="remove-contact-card"
           v-for="contact in event?.invitees"
           :key="contact.id"
-          :contact="contact"
-        ></ContactCard>
+          @click="setCurrentContact(contact)"
+        >
+          <ContactCard :contact="contact" class="contact-card"> </ContactCard>
+
+          <div class="delete-icon" @click="removeContact(contact)">
+            <v-icon>mdi-delete</v-icon>
+          </div>
+        </div>
       </div>
 
       <div class="send-invitation">
@@ -65,6 +84,7 @@ const addContact = (contact: Contact) => {
           :key="contact.id"
           :contact="contact"
           @add-contact="addContact"
+          class="contact"
         ></ContactCard>
       </div>
     </div>
@@ -140,5 +160,21 @@ const addContact = (contact: Contact) => {
   gap: 0.3rem;
   padding: 1rem;
   flex-wrap: wrap;
+}
+
+.contact {
+  cursor: pointer;
+}
+
+.delete-icon {
+  position: absolute;
+  cursor: pointer;
+  z-index: 1;
+  margin-left: 8.5rem;
+  margin-top: -5.5rem;
+}
+
+.contact-card {
+  position: relative;
 }
 </style>

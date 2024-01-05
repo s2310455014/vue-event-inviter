@@ -8,7 +8,7 @@ export interface EventsState {
 
 export const useEventStore = defineStore('events', {
   state: (): EventsState => ({
-    events: null,
+    events: [],
     currentEvent: null
   }),
   actions: {

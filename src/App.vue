@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import ButtonLink from '@/components/ButtonLink.vue'
-import {onBeforeMount} from "vue";
-import {Contact} from "@/types";
-import {useContactsStore} from "@/stores/useContactStore";
+import { onBeforeMount } from 'vue'
+import { Contact } from '@/types'
+import { useContactsStore } from '@/stores/useContactStore'
 
 const contactStore = useContactsStore()
 
@@ -14,27 +14,25 @@ onBeforeMount(async () => {
 
     if (results && results.length > 0) {
       const contactsData: Contact[] = results.map(
-          (
-              result: { name: { first: string; last: string }; phone: any; email: any },
-              index: number
-          ) => ({
-            id: index + 1,
-            firstName: result.name.first,
-            lastName: result.name.last,
-            name: result.name.first + ' ' + result.name.last,
-            telNumber: result.phone,
-            email: result.email
-          })
+        (
+          result: { name: { first: string; last: string }; phone: any; email: any },
+          index: number
+        ) => ({
+          id: index + 1,
+          firstName: result.name.first,
+          lastName: result.name.last,
+          name: result.name.first + ' ' + result.name.last,
+          telNumber: result.phone,
+          email: result.email
+        })
       )
 
       for (const contact of contactsData) {
         contactStore.addContact(contact)
-        console.log(contact)
       }
     }
   }
 })
-
 </script>
 
 <template>
