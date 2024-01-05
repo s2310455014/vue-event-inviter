@@ -21,11 +21,11 @@ const toggleFilter = () => {
 }
 
 const filteredEvents = computed(() => {
-  const searchTermLowerCase = searchTerm.value.toLowerCase();
+  const searchTermLowerCase = searchTerm.value.toLowerCase()
 
   return events.filter((event) => {
     const nameMatches = event.name.toLowerCase().includes(searchTermLowerCase)
-    const invitationSentMatches = filterOn.value ? event.isInvitesSent : true
+    const invitationSentMatches = filterOn.value ? !event.isInvitesSent : true
     return nameMatches && invitationSentMatches
   })
 })
