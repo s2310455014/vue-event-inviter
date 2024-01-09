@@ -11,6 +11,11 @@ defineProps<{
 const setCurrentEvent = (event: Event) => {
   eventStore.setCurrentEvent(event)
 }
+
+const removeEvent = (event: Event) => {
+  eventStore.events.splice(eventStore.events.indexOf(event), 1)
+  console.log(event)
+}
 </script>
 
 <template>
@@ -22,6 +27,10 @@ const setCurrentEvent = (event: Event) => {
       :text="event.description"
     >
       <div class="spacer">Invited: {{ event.invitees.length }}</div>
+
+      <div class="delete-icon" @click="removeEvent(event)">
+        <v-icon>mdi-delete</v-icon>
+      </div>
       <v-card-actions>
         <v-btn>
           <router-link @click="setCurrentEvent(event)" class="link" :to="'/event/' + event.id"
@@ -35,6 +44,7 @@ const setCurrentEvent = (event: Event) => {
 
 <style scoped>
 .card {
+  position: relative;
   width: 20rem;
   height: 15rem;
   display: flex;
@@ -61,5 +71,14 @@ const setCurrentEvent = (event: Event) => {
 .link {
   text-decoration: none;
   color: inherit;
+}
+
+.delete-icon {
+  position: absolute;
+  cursor: pointer;
+  z-index: 1;
+  top: 0.2rem;
+  left: 18.5rem;
+  color: grey;
 }
 </style>

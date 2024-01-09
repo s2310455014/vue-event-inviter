@@ -56,6 +56,6 @@ const EVENTS: Event[] = [
   }
 ]
 
-export const initializeEvents = (): Event[] => {
+export function initializeEvents(): Event[] {
   return EVENTS
 }

@@ -1,19 +1,27 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import { initializeEvents } from '@/services/EventsService'
+import { computed, onMounted, ref } from 'vue'
 import CreateEventForm from '@/components/CreateEventForm.vue'
 import EventCard from '@/components/EventCard.vue'
+import { useEventStore } from '@/stores/useEventStore'
 
-const events = initializeEvents()
+const eventStore = useEventStore()
+const events = ref(eventStore.events)
+
+onMounted(async () => {
+  await eventStore.loadExistingEvents()
+  events.value = eventStore.events || []
+})
+
 const openModal = ref(false)
 const filterOn = ref(false)
 const searchTerm = ref('')
 
 const addEvent = (newEvent: Event) => {
+  console.log(newEvent)
   openModal.value = false
-  events.push(newEvent)
   searchTerm.value = ' '
   searchTerm.value = ''
+  eventStore.addEvent(newEvent)
 }
 
 const toggleFilter = () => {
@@ -23,7 +31,7 @@ const toggleFilter = () => {
 const filteredEvents = computed(() => {
   const searchTermLowerCase = searchTerm.value.toLowerCase()
 
-  return events.filter((event) => {
+  return events.value?.filter((event) => {
     const nameMatches = event.name.toLowerCase().includes(searchTermLowerCase)
     const invitationSentMatches = filterOn.value ? !event.isInvitesSent : true
     return nameMatches && invitationSentMatches
