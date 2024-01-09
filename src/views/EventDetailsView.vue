@@ -22,7 +22,6 @@ const handleSendInvites = () => {
 }
 
 const addContact = (contact: Contact) => {
-  console.log(event)
   if (!event?.invitees.find((invitee) => invitee.email == contact.email)) {
     event?.invitees.push(contact)
   }
@@ -33,7 +32,6 @@ const removeContact = (contact: Contact) => {
 }
 
 const setCurrentContact = (contact: Contact) => {
-  console.log(contact)
   contactsStore.setCurrentContact(contact)
 }
 </script>
