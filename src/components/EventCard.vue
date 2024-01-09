@@ -14,7 +14,6 @@ const setCurrentEvent = (event: Event) => {
 
 const removeEvent = (event: Event) => {
   eventStore.events.splice(eventStore.events.indexOf(event), 1)
-  console.log(event)
 }
 </script>
 

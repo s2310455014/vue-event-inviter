@@ -17,7 +17,6 @@ const filterOn = ref(false)
 const searchTerm = ref('')
 
 const addEvent = (newEvent: Event) => {
-  console.log(newEvent)
   openModal.value = false
   searchTerm.value = ' '
   searchTerm.value = ''

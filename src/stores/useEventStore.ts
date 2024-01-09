@@ -26,7 +26,6 @@ export const useEventStore = defineStore('events', {
     },
     removeEvent(event: Event) {
       if (this.events) {
-        console.log('in function')
         this.events = this.events.filter((e) => e.id !== event.id)
       }
     }
