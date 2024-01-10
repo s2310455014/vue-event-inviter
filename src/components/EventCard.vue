@@ -18,9 +18,10 @@ const removeEvent = (event: Event) => {
 </script>
 
 <template>
-  <div class="d-flex align-center flex-column padding">
+  <div class="d-flex align-center flex-column padding" :data-testid="event.id">
     <v-card
       class="card"
+      :id="event.id"
       :title="event.name"
       :subtitle="event.date + ', ' + event.time"
       :text="event.description"

@@ -24,7 +24,7 @@ const filteredContacts = computed(() => {
     </v-responsive>
   </div>
 
-  <div class="container">
+  <div class="container" id="card-section">
     <ContactCard
       v-for="contact in filteredContacts"
       :key="contact.id"

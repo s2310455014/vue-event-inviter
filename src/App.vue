@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import ButtonLink from '@/components/ButtonLink.vue'
-import { onBeforeMount } from 'vue'
+import { onMounted } from 'vue'
 import { Contact } from '@/types'
 import { useContactsStore } from '@/stores/useContactStore'
 
 const contactStore = useContactsStore()
 
-onBeforeMount(async () => {
+onMounted(async () => {
   if (!contactStore.contacts || !contactStore.contacts.length) {
     const url = 'https://randomuser.me/api/?results=20'
     const res = await fetch(url)
@@ -36,7 +36,7 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-  <div class="main">
+  <div class="main" id="app">
     <div class="header">
       <ButtonLink url="/" label="Events" />
       <ButtonLink url="/contacts" label="Contacts" />
