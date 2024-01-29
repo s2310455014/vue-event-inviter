@@ -52,7 +52,7 @@ const filteredEvents = computed(() => {
       </v-dialog>
     </v-btn>
 
-    <v-btn @click="toggleFilter">
+    <v-btn @click="toggleFilter" data-testid="filter">
       <v-icon left>mdi-filter</v-icon>
       {{ filterOn ? 'Show All Events' : 'Show unsent events' }}
     </v-btn>

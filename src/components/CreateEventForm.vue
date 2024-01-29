@@ -45,10 +45,10 @@ const resetForm = () => {
 
 <template>
   <v-form @submit.prevent="createEvent">
-    <v-text-field v-model="eventName" label="Event Name*"></v-text-field>
-    <v-text-field v-model="eventDate" label="Event Date*" type="date"></v-text-field>
-    <v-text-field v-model="eventTime" label="Event Time*" type="time"></v-text-field>
-    <v-text-field v-model="eventDescription" label="Event Description" multi-line></v-text-field>
+    <v-text-field v-model="eventName" label="Event Name*" data-testid="name"></v-text-field>
+    <v-text-field v-model="eventDate" label="Event Date*" type="date" data-testid="date"></v-text-field>
+    <v-text-field v-model="eventTime" label="Event Time*" type="time" data-testid="time"></v-text-field>
+    <v-text-field v-model="eventDescription" label="Event Description" data-testid="descr" multi-line></v-text-field>
 
     <v-btn type="submit">Create Event</v-btn>
   </v-form>
