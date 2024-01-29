@@ -33,7 +33,7 @@ const removeEvent = (event: Event) => {
       <v-card-actions>
         <v-btn>
           <router-link @click="setCurrentEvent(event)" class="link" :to="'/event/' + event.id"
-            >Details anzeigen</router-link
+            >Show details</router-link
           >
         </v-btn>
       </v-card-actions>
