@@ -90,7 +90,7 @@ const handleDrop = (event: DragEvent) => {
     </div>
 
     <div class="contacts-container">
-      <div class="contact-description">CLICK ON A CONTACT TO ADD HIM TO THE EVENT</div>
+      <div class="contact-description">DRAG & DROP CONTACT TO ADD HIM TO THE EVENT</div>
       <div
           class="contacts"
       >
