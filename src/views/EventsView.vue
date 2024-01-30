@@ -3,6 +3,7 @@ import { computed, onMounted, ref } from 'vue'
 import CreateEventForm from '@/components/CreateEventForm.vue'
 import EventCard from '@/components/EventCard.vue'
 import { useEventStore } from '@/stores/useEventStore'
+import type { Event } from '@/types'
 
 const eventStore = useEventStore()
 const events = ref(eventStore.events)

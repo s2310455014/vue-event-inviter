@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ButtonLink from '@/components/ButtonLink.vue'
 import { onMounted } from 'vue'
-import { Contact } from '@/types'
+import type { Contact } from '@/types'
 import { useContactsStore } from '@/stores/useContactStore'
 
 const contactStore = useContactsStore()
