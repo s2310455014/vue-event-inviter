@@ -115,8 +115,18 @@ const handleDrop = (event: DragEvent) => {
   justify-content: space-evenly;
   gap: 3rem;
   margin: 2rem;
+}
 
-  @media (max-width: 900px) {
+.main-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 3rem;
+  margin: 2rem;
+}
+
+@media (max-width: 900px) {
+  .main-container {
     flex-direction: column;
   }
 }
