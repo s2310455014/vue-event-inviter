@@ -31,8 +31,19 @@ const removeContact = (contact: Contact) => {
   event?.invitees.splice(event?.invitees.indexOf(contact), 1)
 }
 
-const setCurrentContact = (contact: Contact) => {
-  contactsStore.setCurrentContact(contact)
+const handleDragStart = (contact: Contact, event: DragEvent) => {
+  event.dataTransfer?.setData('text/plain', JSON.stringify(contact))
+}
+
+const handleDrop = (event: DragEvent) => {
+  event.preventDefault()
+
+  const contactData = event.dataTransfer?.getData('text/plain')
+
+  if (contactData) {
+    const contact = JSON.parse(contactData) as Contact
+    addContact(contact)
+  }
 }
 </script>
 
@@ -53,15 +64,19 @@ const setCurrentContact = (contact: Contact) => {
 
       <div class="contact-description">YOUR INVITEES</div>
 
-      <div class="contact-cards">
+      <div
+          class="contact-cards"
+          @dragover.prevent
+          @drop="handleDrop"
+      >
         <div
-          class="remove-contact-card"
-          v-for="contact in event?.invitees"
-          :key="contact.id"
-          @click="setCurrentContact(contact)"
+            class="remove-contact-card"
+            v-for="contact in event?.invitees"
+            :key="contact.id"
+            @dragstart="handleDragStart(contact, $event)"
+            draggable="true"
         >
           <ContactCard :contact="contact" class="contact-card"> </ContactCard>
-
           <div class="delete-icon" @click="removeContact(contact)">
             <v-icon>mdi-delete</v-icon>
           </div>
@@ -76,13 +91,17 @@ const setCurrentContact = (contact: Contact) => {
 
     <div class="contacts-container">
       <div class="contact-description">CLICK ON A CONTACT TO ADD HIM TO THE EVENT</div>
-      <div class="contacts">
+      <div
+          class="contacts"
+      >
         <ContactCard
-          v-for="contact in contacts"
-          :key="contact.id"
-          :contact="contact"
-          @add-contact="addContact"
-          class="contact"
+            v-for="contact in contacts"
+            :key="contact.id"
+            :contact="contact"
+            @add-contact="addContact"
+            class="contact"
+            draggable="true"
+            @dragstart="handleDragStart(contact, $event)"
         ></ContactCard>
       </div>
     </div>
