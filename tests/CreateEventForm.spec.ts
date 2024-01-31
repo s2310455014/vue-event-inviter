@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('Create Event Form', async ({ page }) => {
-    await page.goto('http://localhost:5173/');
+    await page.goto('https://s2310455014.github.io/vue-event-inviter/#/');
     await page.getByText('Create new event').click();
 
     const name = 'Test Event'
@@ -28,7 +28,7 @@ test('Create Event Form', async ({ page }) => {
 });
 
 test('Create Event Form Validation', async ({ page }) => {
-    await page.goto('http://localhost:5173/');
+    await page.goto('https://s2310455014.github.io/vue-event-inviter/#/');
     await page.getByText('Create new event').click();
 
     await page.getByText('Create Event').click();

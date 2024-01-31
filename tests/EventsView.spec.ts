@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test'
 import type { Event } from '@/types'
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('http://localhost:5173/')
+  await page.goto('https://s2310455014.github.io/vue-event-inviter/#/')
 })
 
 test('Create Event', async ({ page }) => {
