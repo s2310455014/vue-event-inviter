@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
-    await page.goto('https://s2310455014.github.io/vue-event-inviter/#/');
+    await page.goto('/vue-event-inviter/#/');
 });
 
 test('fetches and displays contacts data on mount', async ({ page }) => {
