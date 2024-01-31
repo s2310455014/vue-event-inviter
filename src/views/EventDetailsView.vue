@@ -127,6 +127,7 @@ const setCurrentContact = (contact: Contact) => {
   gap: 0.3rem;
   padding: 1rem;
   flex-wrap: wrap;
+  justify-content: center;
 }
 .send-invitation {
   display: flex;
@@ -152,6 +153,7 @@ const setCurrentContact = (contact: Contact) => {
   gap: 0.3rem;
   padding: 1rem;
   flex-wrap: wrap;
+  justify-content: center;
 }
 .contact {
   cursor: pointer;

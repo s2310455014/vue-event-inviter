@@ -6,7 +6,7 @@ Tobias Kothbauer and Elena Ebetshuber
 
 ## URL to live application
 
-https://docs.google.com/document/d/1eQk6HDF0dSAKXynAsycij_Ux8mz1hn6WbzBhz8ymIp4/edit
+https://s2310455014.github.io/vue-event-inviter/
 
 ## Purpose of the app
 
