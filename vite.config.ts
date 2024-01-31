@@ -13,5 +13,5 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-  base: 'https://s2310455014.github.io/vue-event-inviter/'
+  base: '/vue-event-inviter'
 })
