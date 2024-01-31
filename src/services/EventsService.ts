@@ -1,13 +1,12 @@
 import type { Event } from '@/types'
-
 const EVENTS: Event[] = [
   {
     id: 1,
-    name: 'Weihnachtsfeier',
+    name: 'Christmas party',
     date: '28.12.2023',
     time: '18:00',
     location: 'Linz',
-    description: 'Gemütliche Weihnachtsfeier mit Punsch und Keksen',
+    description: 'Cozy christmas party with friends and family',
     isInvitesSent: false,
     invitees: [
       {
@@ -21,7 +20,7 @@ const EVENTS: Event[] = [
   },
   {
     id: 2,
-    name: 'FKF - Das Kalenderfest',
+    name: 'FKF - The students party',
     date: '02.12.2023',
     time: '20:00',
     location: 'Hagenberg',
@@ -55,7 +54,6 @@ const EVENTS: Event[] = [
     invitees: []
   }
 ]
-
 export function initializeEvents(): Event[] {
   return EVENTS
 }
