@@ -25,21 +25,22 @@ const addContact = (contact: Contact) => {
 const removeContact = (contact: Contact) => {
   event?.invitees.splice(event?.invitees.indexOf(contact), 1)
 }
-const setCurrentContact = (contact: Contact) => {
-  contactsStore.setCurrentContact(contact)
+const handleDragStart = (contact: Contact, event: DragEvent) => {
+  event.dataTransfer?.setData('text/plain', JSON.stringify(contact))
+}
+const handleDrop = (event: DragEvent) => {
+  event.preventDefault()
+  const contactData = event.dataTransfer?.getData('text/plain')
+  if (contactData) {
+    const contact = JSON.parse(contactData) as Contact
+    addContact(contact)
+  }
 }
 </script>
 <template>
   <div class="main-container">
     <div class="event-details-container">
-      <div class="heading-and-back-button">
-        <div class="back-button">
-          <router-link to="/">
-            <v-icon>mdi-keyboard-backspace</v-icon>
-          </router-link>
-        </div>
-        <h1>{{ event?.name }}</h1>
-      </div>
+      <h1>{{ event?.name }}</h1>
       <div class="details">
         <div class="icon-container">
           <v-icon>mdi-calendar-month</v-icon>
@@ -51,12 +52,13 @@ const setCurrentContact = (contact: Contact) => {
         </div>
       </div>
       <div class="contact-description">YOUR INVITEES</div>
-      <div class="contact-cards">
+      <div class="contact-cards" @dragover.prevent @drop="handleDrop">
         <div
           class="remove-contact-card"
           v-for="contact in event?.invitees"
           :key="contact.id"
-          @click="setCurrentContact(contact)"
+          @dragstart="handleDragStart(contact, $event)"
+          draggable="true"
         >
           <ContactCard :contact="contact" class="contact-card"> </ContactCard>
           <div class="delete-icon" @click="removeContact(contact)">
@@ -70,7 +72,7 @@ const setCurrentContact = (contact: Contact) => {
       </div>
     </div>
     <div class="contacts-container">
-      <div class="contact-description">CLICK ON A CONTACT TO ADD HIM TO THE EVENT</div>
+      <div class="contact-description">DRAG & DROP CONTACT TO ADD HIM TO THE EVENT</div>
       <div class="contacts">
         <ContactCard
           v-for="contact in contacts"
@@ -78,6 +80,8 @@ const setCurrentContact = (contact: Contact) => {
           :contact="contact"
           @add-contact="addContact"
           class="contact"
+          draggable="true"
+          @dragstart="handleDragStart(contact, $event)"
         ></ContactCard>
       </div>
     </div>
@@ -90,18 +94,17 @@ const setCurrentContact = (contact: Contact) => {
   justify-content: space-evenly;
   gap: 3rem;
   margin: 2rem;
-  @media (max-width: 900px) {
-    flex-direction: column;
-  }
 }
-.heading-and-back-button {
+.main-container {
   display: flex;
-  align-items: center;
-  gap: 1rem;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 3rem;
+  margin: 2rem;
 }
-.back-button {
-  :hover {
-    scale: 1.5;
+@media (max-width: 900px) {
+  .main-container {
+    flex-direction: column;
   }
 }
 .event-details-container {
@@ -127,6 +130,7 @@ const setCurrentContact = (contact: Contact) => {
   gap: 0.3rem;
   padding: 1rem;
   flex-wrap: wrap;
+  justify-content: center;
 }
 .send-invitation {
   display: flex;
@@ -152,6 +156,7 @@ const setCurrentContact = (contact: Contact) => {
   gap: 0.3rem;
   padding: 1rem;
   flex-wrap: wrap;
+  justify-content: center;
 }
 .contact {
   cursor: pointer;

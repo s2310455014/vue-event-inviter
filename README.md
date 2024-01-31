@@ -6,7 +6,7 @@ Tobias Kothbauer and Elena Ebetshuber
 
 ## URL to live application
 
-https://docs.google.com/document/d/1eQk6HDF0dSAKXynAsycij_Ux8mz1hn6WbzBhz8ymIp4/edit
+https://s2310455014.github.io/vue-event-inviter/
 
 ## Purpose of the app
 
@@ -56,7 +56,7 @@ This user guide aims to provide a user-friendly experience, allowing you to navi
 ### Event Details:
 
 - Managing Invitees: Access the details of a created event to efficiently handle invitee management.
-  - Add invitees by clicking on a contact card.
+  - Add invitees by dragging the desired contact card to the "Your invitees" area.
   - Remove invitees by clicking on the bin icon.
 - Sending Invitations: Once invitees are confirmed, initiate the invitation process by clicking on the "Send invitation to new invitees" button. Invitees will receive notifications via WhatsApp, ensuring effective communication.
 
